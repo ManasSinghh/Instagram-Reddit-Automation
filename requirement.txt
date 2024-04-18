@@ -1,0 +1,6 @@
+instagrapi
+pillow
+python-dotenv
+requests
+upstash-redis
+sentry-sdk
