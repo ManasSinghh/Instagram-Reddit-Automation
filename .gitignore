@@ -2,3 +2,4 @@
 .venv
 temp/image.jpg
 __pycache__/
+*.pyc
