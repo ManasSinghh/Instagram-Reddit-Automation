@@ -5,8 +5,7 @@ from lib.redis import does_exist, add_key
 import praw
 
 
-if not getenv("REDDIT_CLIENT_ID") or not getenv("REDDIT_CLIENT_SECRET"):
-    raise Exception("Please provide REDDIT_CLIENT_ID and REDDIT_CLIENT_SECRET in .env")
+
 
 reddit = praw.Reddit(
     client_id=getenv("REDDIT_CLIENT_ID"),

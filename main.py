@@ -25,6 +25,9 @@ if not username or not password or not subreddit:
     logger.error("Please provide all the required ENV variables")
     raise Exception("Please provide all the required ENV variables")
 
+if not getenv("REDDIT_CLIENT_ID") or not getenv("REDDIT_CLIENT_SECRET"):
+    raise Exception("Please provide REDDIT_CLIENT_ID and REDDIT_CLIENT_SECRET in .env")
+
 
 # Checking if SENTRY_URL exists in ENV
 if getenv("SENTRY_URL"):
