@@ -15,6 +15,8 @@ jobs:
             UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
             UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
             SENTRY_URL: ${{ secrets.SENTRY_URL }}
+            REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+            REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
         steps:
             - name: Checkout
               uses: actions/checkout@v2

@@ -5,10 +5,6 @@ from lib.redis import does_exist, add_key
 import praw
 
 
-
-
-
-
 def get_random_post():
     """
     Function to get a random post from Reddit
