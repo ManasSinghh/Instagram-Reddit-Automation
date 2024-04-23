@@ -68,14 +68,14 @@ image_path = downloadImage(post[1])
 logger.info(f"Image Downloaded at: {image_path}")
 
 
-# logger.info("Logging to Instagram")
-# # Logging to Instagram
-# cl = Client()
-# cl.login(username, password)
-# logger.info(f"Successfully Logged in as {cl.account_info().full_name}")
+logger.info("Logging to Instagram")
+# Logging to Instagram
+cl = Client()
+cl.login(username, password)
+logger.info(f"Successfully Logged in as {cl.account_info().full_name}")
 
-# logger.info("Uploading Post to Instagram")
-# media = cl.photo_upload(image_path, caption=f"{post[0]}\n\n{PREFIX}\n\n{TAGS}")
-# logger.info(f"Successfully Uploaded Post with Media ID: {media.pk}")
-# logger.info("Logging Out")
-# cl.logout()
+logger.info("Uploading Post to Instagram")
+media = cl.photo_upload(image_path, caption=f"{post[0]}\n\n{PREFIX}\n\n{TAGS}")
+logger.info(f"Successfully Uploaded Post with Media ID: {media.pk}")
+logger.info("Logging Out")
+cl.logout()
