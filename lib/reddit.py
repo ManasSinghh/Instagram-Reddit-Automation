@@ -7,11 +7,6 @@ import praw
 
 
 
-reddit = praw.Reddit(
-    client_id=getenv("REDDIT_CLIENT_ID"),
-    client_secret=getenv("REDDIT_CLIENT_SECRET"),
-    user_agent="Insta Reddit Automator by Yashraj Narke",
-)
 
 
 def get_random_post():
@@ -22,6 +17,11 @@ def get_random_post():
     - URL of the post
     """
     subreddit = getenv("SUBREDDIT")
+    reddit = praw.Reddit(
+    client_id=getenv("REDDIT_CLIENT_ID"),
+    client_secret=getenv("REDDIT_CLIENT_SECRET"),
+    user_agent="Insta Reddit Automator by Yashraj Narke",
+)   
     for summary in reddit.subreddit(subreddit).hot(limit=50):
 
         # We'll loop through all the posts and we check for the following
