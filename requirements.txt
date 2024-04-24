@@ -5,3 +5,4 @@ requests
 upstash-redis
 sentry-sdk
 praw
+pyotp

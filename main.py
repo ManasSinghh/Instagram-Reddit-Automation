@@ -3,6 +3,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Importing Packages
+import pyotp as TwoFactorTOTP
+
 from custom_logger import get_logger
 from lib.misc import camelCaseToNormal, PREFIX, TAGS, downloadImage
 from os import getenv
@@ -71,14 +73,41 @@ image_path = downloadImage(post[1])
 logger.info(f"Image Downloaded at: {image_path}")
 
 
-logger.info("Logging to Instagram")
-# Logging to Instagram
-cl = Client()
-cl.login(username, password)
-logger.info(f"Successfully Logged in as {cl.account_info().full_name}")
+def loginAndUpload():
+    logger.info("Logging to Instagram")
+    # Logging to Instagram
+    cl = Client()
 
-logger.info("Uploading Post to Instagram")
-media = cl.photo_upload(image_path, caption=f"{post[0]}\n\n{PREFIX}\n\n{TAGS}")
-logger.info(f"Successfully Uploaded Post with Media ID: {media.pk}")
-logger.info("Logging Out")
-cl.logout()
+    if getenv("TOTP_SECRET"):
+        logger.info("2FA is enabled")
+        # Remove spaces from TOTP_SECRET
+        totp = TwoFactorTOTP.TOTP(getenv("TOTP_SECRET").replace(" ", ""))
+        cl.login(username, password, verification_code=totp.now())
+    else:
+        cl.login(username, password)
+        logger.info("2FA is disabled")
+
+    logger.info(f"Successfully Logged in as {cl.account_info().full_name}")
+
+    logger.info("Uploading Post to Instagram")
+    media = cl.photo_upload(image_path, caption=f"{post[0]}\n\n{PREFIX}\n\n{TAGS}")
+    logger.info(f"Successfully Uploaded Post with Media ID: {media.pk}")
+    logger.info("Logging Out")
+    cl.logout()
+
+
+max_tries = 3
+
+for i in range(max_tries):
+    try:
+        loginAndUpload()
+        break
+    except Exception as e:
+        logger.error(f"Error: {e}")
+        if i < max_tries - 1:
+            logger.info(f"Retrying... {i + 1}")
+        else:
+            logger.error("Max Retries reached. Exiting...")
+            raise e
+        
+logger.info("Done")
