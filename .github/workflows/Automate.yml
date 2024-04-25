@@ -2,8 +2,9 @@ name: Instagram Reddit Automator
 on:
     workflow_dispatch: 
     schedule:
-        # Every 6 hours
-        - cron: '0 */6 * * *'  # You can change the time here
+        # Every 45 Minutes
+        # use https://crontab.guru/ to generate cron time
+        - cron: '*/45 * * * *'  # You can change the time here
         
 jobs:
     upload:
@@ -35,6 +36,3 @@ jobs:
                   
             - name: Run script
               run: python main.py
-
-
-    

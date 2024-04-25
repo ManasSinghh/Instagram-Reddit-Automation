@@ -24,6 +24,27 @@
 - Easy Automation using GitHub Actions
 - Use any subreddit
 
+## Requirements
+
+- Instagram Account
+- Reddit Client ID and Secret
+
+  > 1. Goto [Reddit Apps](https://www.reddit.com/prefs/apps)
+  > 2. Click on "Create App" or "Create Another App"
+  > 3. Fill in the details
+  >    ![Reddit App](https://lambda.yashraj.eu.org/eA2K2uT) > ![Reddit App](https://lambda.yashraj.eu.org/chlx0KD)
+
+- OPTIONAL: Sentry DSN
+
+  > Create a free account on [Sentry](https://sentry.io/) and get the DSN
+
+- Upstash Redis URL
+  > Create a free account on [Upstash](https://upstash.com/) and get the Redis URL
+
+> :warning: **It's Recommended to use a 2fa token to Login with Intagram**: Get a 2FA token from [here](https://accountscenter.instagram.com/password_and_security/).
+
+Check [.env.example](.env.example) for more details
+
 ## How To Use
 
 You can either run the script locally or use GitHub Actions to automate the process.
@@ -71,6 +92,9 @@ SUBREDDIT - The subreddit you want to fetch images from
 UPSTASH_REDIS_REST_URL - Upstash Redis URL
 UPSTASH_REDIS_REST_TOKEN - Upstash Redis Token
 SENTRY_URL - Sentry DSN (Optional)
+REDDIT_CLIENT_ID - Reddit Client ID
+REDDIT_CLIENT_SECRET - Reddit Client Secret
+TOTP_SECRET - 2FA Token for Instagram Login (Optional but Recommended)
 
 ```
 
@@ -80,9 +104,8 @@ SENTRY_URL - Sentry DSN (Optional)
 
 ## Credits
 
-This repo uses [subzeroid/instagrapi](https://github.com/subzeroid/instagrapi)'s api for posting images to Instagram.
+This repo uses [subzeroid/instagrapi](https://github.com/subzeroid/instagrapi)'s api for posting images to Instagram and [PRAW](https://praw.readthedocs.io/) to fetch images from Reddit.
 
 ## License
 
 [MIT](LICENSE)
-
